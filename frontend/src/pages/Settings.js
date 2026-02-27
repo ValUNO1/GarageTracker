@@ -69,9 +69,38 @@ export default function Settings() {
   return (
     <div className="space-y-6 animate-fade-in max-w-2xl" data-testid="settings-page">
       <div>
-        <h1 className="text-3xl font-outfit font-bold text-foreground">Settings</h1>
-        <p className="text-muted-foreground mt-1">Manage your preferences and notifications</p>
+        <h1 className="text-3xl font-outfit font-bold text-foreground">{t('settings')}</h1>
+        <p className="text-muted-foreground mt-1">{t('managePreferences')}</p>
       </div>
+
+      {/* Language */}
+      <Card className="card-base">
+        <CardHeader>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 flex items-center justify-center">
+              <Globe className="w-5 h-5 text-indigo-600" />
+            </div>
+            <div>
+              <CardTitle className="text-lg font-outfit">{t('language')}</CardTitle>
+              <CardDescription>{t('selectLanguage')}</CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <Select value={language} onValueChange={setLanguage}>
+            <SelectTrigger className="w-48" data-testid="language-select">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {Object.entries(languageNames).map(([code, name]) => (
+                <SelectItem key={code} value={code}>
+                  {name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </CardContent>
+      </Card>
 
       {/* Appearance */}
       <Card className="card-base">
@@ -81,8 +110,8 @@ export default function Settings() {
               <Palette className="w-5 h-5 text-indigo-600" />
             </div>
             <div>
-              <CardTitle className="text-lg font-outfit">Appearance</CardTitle>
-              <CardDescription>Customize how AutoTrack looks</CardDescription>
+              <CardTitle className="text-lg font-outfit">{t('appearance')}</CardTitle>
+              <CardDescription>{t('customizeAppearance')}</CardDescription>
             </div>
           </div>
         </CardHeader>
@@ -95,8 +124,8 @@ export default function Settings() {
                 <Moon className="w-5 h-5 text-indigo-400" />
               )}
               <div>
-                <Label className="text-base">Theme</Label>
-                <p className="text-sm text-muted-foreground">Choose light or dark mode</p>
+                <Label className="text-base">{t('theme')}</Label>
+                <p className="text-sm text-muted-foreground">{t('chooseLightDark')}</p>
               </div>
             </div>
             <Select value={theme} onValueChange={setTheme}>
@@ -107,13 +136,13 @@ export default function Settings() {
                 <SelectItem value="light">
                   <div className="flex items-center gap-2">
                     <Sun className="w-4 h-4" />
-                    Light
+                    {t('light')}
                   </div>
                 </SelectItem>
                 <SelectItem value="dark">
                   <div className="flex items-center gap-2">
                     <Moon className="w-4 h-4" />
-                    Dark
+                    {t('dark')}
                   </div>
                 </SelectItem>
               </SelectContent>
