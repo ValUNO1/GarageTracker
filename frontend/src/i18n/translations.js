@@ -815,7 +815,7 @@ export const translations = {
     // Settings
     managePreferences: "Управление настройками и уведомлениями",
     appearance: "Внешний вид",
-    customizeAppearance: "Настройте внешний вид AutoTrack",
+    customizeAppearance: "Настройте внешний вид Garage Tracker",
     theme: "Тема",
     chooseLightDark: "Выберите светлую или тёмную тему",
     light: "Светлая",
