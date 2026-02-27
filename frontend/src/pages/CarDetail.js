@@ -526,16 +526,19 @@ export default function CarDetail() {
               {tasks.map(task => {
                 const taskType = maintenanceTypes.find(t => t.value === task.task_type);
                 const IconComponent = taskType?.icon || Wrench;
+                const isReplacementRequested = task.status === 'replacement_requested' || task.replacement_requested;
                 return (
-                  <Card key={task.id} className="card-base" data-testid={`maintenance-task-${task.id}`}>
+                  <Card key={task.id} className={`card-base ${isReplacementRequested ? 'border-purple-500 dark:border-purple-400' : ''}`} data-testid={`maintenance-task-${task.id}`}>
                     <CardContent className="p-4">
                       <div className="flex items-start gap-4">
                         <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                          isReplacementRequested ? 'bg-purple-100 dark:bg-purple-900/20' :
                           task.status === 'overdue' ? 'bg-red-100 dark:bg-red-900/20' :
                           task.status === 'due_soon' ? 'bg-amber-100 dark:bg-amber-900/20' :
                           'bg-emerald-100 dark:bg-emerald-900/20'
                         }`}>
                           <IconComponent className={`w-6 h-6 ${
+                            isReplacementRequested ? 'text-purple-600' :
                             task.status === 'overdue' ? 'text-red-600' :
                             task.status === 'due_soon' ? 'text-amber-600' :
                             'text-emerald-600'
@@ -545,19 +548,32 @@ export default function CarDetail() {
                           <div className="flex items-center justify-between">
                             <h3 className="font-medium capitalize">{task.task_type.replace(/_/g, ' ')}</h3>
                             <Badge className={
+                              isReplacementRequested ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400' :
                               task.status === 'overdue' ? 'status-overdue' :
                               task.status === 'due_soon' ? 'status-due-soon' :
                               'status-good'
                             }>
-                              {task.status === 'overdue' ? 'Overdue' : task.status === 'due_soon' ? 'Due Soon' : 'Good'}
+                              {isReplacementRequested ? 'Needs Replacement' : 
+                               task.status === 'overdue' ? 'Overdue' : 
+                               task.status === 'due_soon' ? 'Due Soon' : 'Good'}
                             </Badge>
                           </div>
+                          
+                          {/* Show replacement reason if requested */}
+                          {isReplacementRequested && task.replacement_reason && (
+                            <div className="mt-2 p-2 rounded-lg bg-purple-50 dark:bg-purple-900/10 border border-purple-200 dark:border-purple-800">
+                              <p className="text-sm text-purple-700 dark:text-purple-300">
+                                <strong>Reason:</strong> {task.replacement_reason}
+                              </p>
+                            </div>
+                          )}
+                          
                           <div className="mt-2 space-y-1 text-sm text-muted-foreground">
                             <p>Last: {task.last_performed_mileage?.toLocaleString() || 'N/A'} mi</p>
                             <p>Next: {task.next_due_mileage?.toLocaleString() || 'N/A'} mi</p>
                             <p>Every {task.interval_miles?.toLocaleString()} mi / {task.interval_months} months</p>
                           </div>
-                          <div className="flex gap-2 mt-3">
+                          <div className="flex flex-wrap gap-2 mt-3">
                             <Dialog open={completeTaskOpen === task.id} onOpenChange={(open) => setCompleteTaskOpen(open ? task.id : null)}>
                               <DialogTrigger asChild>
                                 <Button size="sm" className="bg-indigo-600 hover:bg-indigo-700" data-testid={`complete-task-${task.id}`}>
