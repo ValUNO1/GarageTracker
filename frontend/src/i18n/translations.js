@@ -1029,7 +1029,7 @@ export const translations = {
     // Settings
     managePreferences: "환경 설정 및 알림 관리",
     appearance: "외관",
-    customizeAppearance: "AutoTrack 외관 사용자 정의",
+    customizeAppearance: "Garage Tracker 외관 사용자 정의",
     theme: "테마",
     chooseLightDark: "라이트 또는 다크 모드 선택",
     light: "라이트",
