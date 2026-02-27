@@ -602,6 +602,79 @@ export default function CarDetail() {
                                 </div>
                               </DialogContent>
                             </Dialog>
+                            
+                            {/* Request Replacement Button */}
+                            {!isReplacementRequested ? (
+                              <Dialog open={replacementOpen === task.id} onOpenChange={(open) => {
+                                setReplacementOpen(open ? task.id : null);
+                                if (!open) setReplacementReason('');
+                              }}>
+                                <DialogTrigger asChild>
+                                  <Button size="sm" variant="outline" className="border-purple-300 text-purple-600 hover:bg-purple-50 dark:border-purple-700 dark:text-purple-400 dark:hover:bg-purple-900/20" data-testid={`request-replacement-${task.id}`}>
+                                    <AlertOctagon className="w-4 h-4 mr-1" />
+                                    Request Replace
+                                  </Button>
+                                </DialogTrigger>
+                                <DialogContent>
+                                  <DialogHeader>
+                                    <DialogTitle>Request Early Replacement</DialogTitle>
+                                  </DialogHeader>
+                                  <div className="space-y-4 mt-4">
+                                    <p className="text-sm text-muted-foreground">
+                                      Request an early replacement for <strong className="capitalize text-foreground">{task.task_type.replace(/_/g, ' ')}</strong> before the scheduled maintenance time.
+                                    </p>
+                                    <div className="space-y-2">
+                                      <Label>Reason for replacement</Label>
+                                      <Select value={replacementReason} onValueChange={setReplacementReason}>
+                                        <SelectTrigger>
+                                          <SelectValue placeholder="Select a reason" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                          <SelectItem value="Low fluid level">Low fluid level</SelectItem>
+                                          <SelectItem value="Fluid looks dirty/dark">Fluid looks dirty/dark</SelectItem>
+                                          <SelectItem value="Strange noise detected">Strange noise detected</SelectItem>
+                                          <SelectItem value="Performance issues">Performance issues</SelectItem>
+                                          <SelectItem value="Warning light on">Warning light on</SelectItem>
+                                          <SelectItem value="Leak detected">Leak detected</SelectItem>
+                                          <SelectItem value="Mechanic recommendation">Mechanic recommendation</SelectItem>
+                                          <SelectItem value="Other">Other</SelectItem>
+                                        </SelectContent>
+                                      </Select>
+                                    </div>
+                                    {replacementReason === 'Other' && (
+                                      <div className="space-y-2">
+                                        <Label>Describe the issue</Label>
+                                        <Textarea
+                                          value={replacementReason === 'Other' ? '' : replacementReason}
+                                          onChange={(e) => setReplacementReason(e.target.value)}
+                                          placeholder="Describe why replacement is needed..."
+                                        />
+                                      </div>
+                                    )}
+                                    <Button 
+                                      onClick={() => handleRequestReplacement(task.id)} 
+                                      className="w-full bg-purple-600 hover:bg-purple-700"
+                                      disabled={!replacementReason}
+                                    >
+                                      <AlertOctagon className="w-4 h-4 mr-2" />
+                                      Request Replacement
+                                    </Button>
+                                  </div>
+                                </DialogContent>
+                              </Dialog>
+                            ) : (
+                              <Button 
+                                size="sm" 
+                                variant="outline" 
+                                className="border-slate-300 text-slate-600"
+                                onClick={() => handleCancelReplacement(task.id)}
+                                data-testid={`cancel-replacement-${task.id}`}
+                              >
+                                <X className="w-4 h-4 mr-1" />
+                                Cancel Request
+                              </Button>
+                            )}
+                            
                             <Button size="sm" variant="ghost" onClick={() => handleDeleteTask(task.id)} data-testid={`delete-task-${task.id}`}>
                               <Trash2 className="w-4 h-4 text-muted-foreground" />
                             </Button>
