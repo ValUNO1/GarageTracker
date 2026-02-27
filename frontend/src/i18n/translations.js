@@ -675,6 +675,14 @@ export const translations = {
     findMechanics: "Найти механиков",
     settings: "Настройки",
     
+    // Distance Unit
+    distanceUnit: "Единица расстояния",
+    selectDistanceUnit: "Выберите мили или километры",
+    miles: "Мили",
+    kilometers: "Километры",
+    mi: "ми",
+    km: "км",
+    
     // Dashboard
     overview: "Обзор обслуживания вашего автомобиля",
     addVehicle: "Добавить авто",
