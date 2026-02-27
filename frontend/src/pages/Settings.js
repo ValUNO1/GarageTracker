@@ -229,12 +229,12 @@ export default function Settings() {
           {saving ? (
             <>
               <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-              Saving...
+              {t('saving')}
             </>
           ) : (
             <>
               <Save className="w-4 h-4 mr-2" />
-              Save Settings
+              {t('saveSettings')}
             </>
           )}
         </Button>
