@@ -385,7 +385,7 @@ export default function CarDetail() {
           <CardHeader>
             <CardTitle className="text-lg font-outfit">Health Status</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-3">
             <div className="flex items-center justify-between p-3 rounded-lg bg-emerald-50 dark:bg-emerald-900/20">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-emerald-600" />
@@ -407,6 +407,15 @@ export default function CarDetail() {
               </div>
               <span className="text-xl font-bold text-red-600">{statusCounts.overdue}</span>
             </div>
+            {statusCounts.replacement_requested > 0 && (
+              <div className="flex items-center justify-between p-3 rounded-lg bg-purple-50 dark:bg-purple-900/20">
+                <div className="flex items-center gap-2">
+                  <AlertOctagon className="w-5 h-5 text-purple-600" />
+                  <span className="text-sm font-medium">Needs Replacement</span>
+                </div>
+                <span className="text-xl font-bold text-purple-600">{statusCounts.replacement_requested}</span>
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>
