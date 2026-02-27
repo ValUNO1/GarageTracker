@@ -16,7 +16,7 @@ import {
   Palette
 } from 'lucide-react';
 
-const API_URL = process.env.REACT_APP_BACKEND_URL + '/api';
+const API_URL = `${process.env.REACT_APP_BACKEND_URL || ''}/api`.replace(/([^:]\/)\/+/g, '$1');
 
 export default function Settings() {
   const { theme, setTheme } = useTheme();
