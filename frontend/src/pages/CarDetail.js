@@ -148,6 +148,34 @@ export default function CarDetail() {
     }
   };
 
+  const handleRequestReplacement = async (taskId) => {
+    if (!replacementReason.trim()) {
+      toast.error('Please provide a reason for replacement');
+      return;
+    }
+    try {
+      await axios.post(`${API_URL}/maintenance/${taskId}/request-replacement`, {
+        reason: replacementReason
+      });
+      toast.success('Replacement requested!');
+      setReplacementOpen(null);
+      setReplacementReason('');
+      fetchCarData();
+    } catch (error) {
+      toast.error('Failed to request replacement');
+    }
+  };
+
+  const handleCancelReplacement = async (taskId) => {
+    try {
+      await axios.post(`${API_URL}/maintenance/${taskId}/cancel-replacement`);
+      toast.success('Replacement request cancelled');
+      fetchCarData();
+    } catch (error) {
+      toast.error('Failed to cancel replacement');
+    }
+  };
+
   const handleAddMileage = async (e) => {
     e.preventDefault();
     try {
