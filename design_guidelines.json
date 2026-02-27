@@ -1,0 +1,178 @@
+{
+  "design_system": {
+    "app_name": "AutoTrack",
+    "theme_strategy": "Soft Utility",
+    "emotional_archetype": "Friendly & Trustworthy",
+    "typography": {
+      "headings": {
+        "font_family": "Outfit, sans-serif",
+        "weights": ["500", "600", "700"],
+        "usage": "Use for all page titles, card headers, and major metrics."
+      },
+      "body": {
+        "font_family": "Inter, sans-serif",
+        "weights": ["400", "500"],
+        "usage": "Use for all paragraph text, labels, and inputs."
+      },
+      "scale": {
+        "h1": "text-4xl md:text-5xl font-bold tracking-tight",
+        "h2": "text-3xl font-semibold tracking-tight",
+        "h3": "text-2xl font-semibold",
+        "h4": "text-xl font-medium",
+        "body_lg": "text-lg leading-relaxed",
+        "body_base": "text-base leading-relaxed",
+        "caption": "text-sm text-muted-foreground"
+      }
+    },
+    "colors": {
+      "primary": {
+        "name": "Mechanic Indigo",
+        "hex": "#4F46E5",
+        "tailwind": "bg-indigo-600 text-white hover:bg-indigo-700",
+        "usage": "Primary buttons, active states, key branding elements."
+      },
+      "secondary": {
+        "name": "Slate Neutral",
+        "hex": "#F1F5F9",
+        "tailwind": "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-50",
+        "usage": "Secondary buttons, card backgrounds in light mode."
+      },
+      "accent": {
+        "name": "Maintenance Amber",
+        "hex": "#F59E0B",
+        "tailwind": "text-amber-500 bg-amber-50 dark:bg-amber-900/20",
+        "usage": "Warnings, 'Due Soon' badges, critical alerts."
+      },
+      "success": {
+        "name": "Go Green",
+        "hex": "#10B981",
+        "tailwind": "text-emerald-500 bg-emerald-50 dark:bg-emerald-900/20",
+        "usage": "Success states, 'Good Condition' badges."
+      },
+      "background": {
+        "light": "bg-slate-50",
+        "dark": "dark:bg-slate-950"
+      },
+      "surface": {
+        "light": "bg-white",
+        "dark": "dark:bg-slate-900"
+      }
+    },
+    "layout": {
+      "spacing_scale": "generous",
+      "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+      "radius": "rounded-xl",
+      "grid_strategy": "Bento Grid (Asymmetric)",
+      "modes": {
+        "dashboard": "grid grid-cols-1 md:grid-cols-12 gap-6",
+        "card_list": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      }
+    },
+    "components": {
+      "buttons": {
+        "primary": "rounded-full px-6 py-2.5 font-medium transition-all hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0",
+        "secondary": "rounded-full px-6 py-2.5 font-medium bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        "ghost": "rounded-full hover:bg-slate-100 dark:hover:bg-slate-800"
+      },
+      "cards": {
+        "base": "rounded-xl border border-slate-200 dark:border-slate-800 bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow duration-200",
+        "interactive": "cursor-pointer hover:border-indigo-500/50 dark:hover:border-indigo-400/50"
+      },
+      "inputs": {
+        "base": "rounded-lg border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-white dark:bg-slate-900"
+      }
+    },
+    "animation": {
+      "micro_interactions": "transition-all duration-200 ease-out",
+      "page_transition": "animate-in fade-in slide-in-from-bottom-4 duration-500",
+      "hover_lift": "hover:-translate-y-1 hover:shadow-lg"
+    }
+  },
+  "visual_assets": {
+    "images": [
+      {
+        "category": "placeholders",
+        "name": "white_sedan",
+        "url": "https://images.unsplash.com/photo-1562412386-e48a8277c959?auto=format&fit=crop&q=80",
+        "alt": "White BMW Sedan Side View"
+      },
+      {
+        "category": "placeholders",
+        "name": "black_suv",
+        "url": "https://images.unsplash.com/photo-1653325189816-5d8dc746cc16?auto=format&fit=crop&q=80",
+        "alt": "Black SUV Side View"
+      },
+      {
+        "category": "placeholders",
+        "name": "engine_bay",
+        "url": "https://images.unsplash.com/photo-1604279088596-ec4b06b37661?auto=format&fit=crop&q=80",
+        "alt": "Car Engine Bay"
+      },
+      {
+        "category": "avatars",
+        "name": "ai_mechanic",
+        "url": "https://images.unsplash.com/photo-1671718648167-6b209c182480?auto=format&fit=crop&q=80",
+        "alt": "Friendly Mechanic Avatar"
+      }
+    ],
+    "icons": {
+      "library": "lucide-react",
+      "style": "stroke-width={1.5}",
+      "common": {
+        "oil": "Droplet",
+        "brake": "Disc",
+        "battery": "BatteryCharging",
+        "alert": "AlertTriangle",
+        "check": "CheckCircle2",
+        "calendar": "CalendarDays",
+        "mileage": "Gauge",
+        "mechanic": "Wrench"
+      }
+    }
+  },
+  "layout_templates": {
+    "dashboard_grid": {
+      "hero_card": "col-span-1 md:col-span-8 lg:col-span-8 row-span-2",
+      "stats_card": "col-span-1 md:col-span-4 lg:col-span-4 row-span-1",
+      "list_card": "col-span-1 md:col-span-4 lg:col-span-4 row-span-2",
+      "action_card": "col-span-1 md:col-span-4 lg:col-span-4"
+    }
+  },
+  "instructions_to_main_agent": {
+    "do_not": [
+      "Do NOT use pure black (#000000) for backgrounds.",
+      "Do NOT use 'Inter' for headings - use 'Outfit'.",
+      "Do NOT make the dashboard crowded - leave whitespace.",
+      "Do NOT use complex gradients - stick to solid colors or very subtle washes."
+    ],
+    "must_do": [
+      "Implement a toggle for Light/Dark mode in the Settings or Navbar.",
+      "Use the Bento Grid layout for the main dashboard.",
+      "Use 'Sonner' for all toast notifications (success/error).",
+      "Use 'Recharts' or Shadcn Charts for any data visualization (mileage trends).",
+      "Ensure all interactive elements have hover states.",
+      "Use the provided image URLs for placeholders if the user has not uploaded any."
+    ],
+    "implementation_steps": [
+      "1. Setup Tailwind config with new colors and fonts.",
+      "2. Create the Layout shell (Navbar, Sidebar).",
+      "3. Build the Dashboard using the Bento Grid strategy.",
+      "4. Implement the 'Add Car' flow using Shadcn Dialog/Form.",
+      "5. Create the Maintenance Log list with clear status badges."
+    ]
+  },
+  "universal_guidelines": {
+    "general": [
+      "Don't make generic centered layouts.",
+      "Create depth through layered design elements.",
+      "Use glass-morphism effects for sticky headers.",
+      "Every interaction needs micro-animations.",
+      "Use 2-3x more spacing than feels comfortable."
+    ],
+    "accessibility": [
+      "Ensure text contrast meets APCA/WCAG standards.",
+      "All interactive elements must include 'data-testid'.",
+      "Focus states must be clearly visible."
+    ]
+  }
+}
