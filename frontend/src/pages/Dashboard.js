@@ -260,7 +260,7 @@ export default function Dashboard() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="make">Make</Label>
+                  <Label htmlFor="make">{t('make')}</Label>
                   <Input
                     id="make"
                     placeholder="Toyota"
@@ -271,7 +271,7 @@ export default function Dashboard() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="model">Model</Label>
+                  <Label htmlFor="model">{t('model')}</Label>
                   <Input
                     id="model"
                     placeholder="Camry"
@@ -284,13 +284,13 @@ export default function Dashboard() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="year">Year</Label>
+                  <Label htmlFor="year">{t('year')}</Label>
                   <Select 
                     value={newCar.year.toString()} 
                     onValueChange={(v) => setNewCar({ ...newCar, year: parseInt(v) })}
                   >
                     <SelectTrigger data-testid="car-year-select">
-                      <SelectValue placeholder="Select year" />
+                      <SelectValue placeholder={t('year')} />
                     </SelectTrigger>
                     <SelectContent>
                       {Array.from({ length: 30 }, (_, i) => new Date().getFullYear() - i).map(year => (
@@ -300,7 +300,7 @@ export default function Dashboard() {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="color">Color</Label>
+                  <Label htmlFor="color">{t('color')}</Label>
                   <Input
                     id="color"
                     placeholder="Silver"
@@ -312,7 +312,7 @@ export default function Dashboard() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="license_plate">License Plate</Label>
+                  <Label htmlFor="license_plate">{t('licensePlate')}</Label>
                   <Input
                     id="license_plate"
                     placeholder="ABC-1234"
@@ -322,7 +322,7 @@ export default function Dashboard() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="current_mileage">Current Mileage</Label>
+                  <Label htmlFor="current_mileage">{t('currentMileage')}</Label>
                   <Input
                     id="current_mileage"
                     type="number"
