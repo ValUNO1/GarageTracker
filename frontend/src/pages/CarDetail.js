@@ -57,6 +57,7 @@ const carPlaceholders = [
 export default function CarDetail() {
   const { carId } = useParams();
   const navigate = useNavigate();
+  const { formatDistance, getDistanceUnitShort } = useLanguage();
   const [car, setCar] = useState(null);
   const [tasks, setTasks] = useState([]);
   const [mileageLogs, setMileageLogs] = useState([]);
