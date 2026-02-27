@@ -571,9 +571,9 @@ export default function CarDetail() {
                           )}
                           
                           <div className="mt-2 space-y-1 text-sm text-muted-foreground">
-                            <p>Last: {task.last_performed_mileage?.toLocaleString() || 'N/A'} mi</p>
-                            <p>Next: {task.next_due_mileage?.toLocaleString() || 'N/A'} mi</p>
-                            <p>Every {task.interval_miles?.toLocaleString()} mi / {task.interval_months} months</p>
+                            <p>Last: {formatDistance(task.last_performed_mileage)}</p>
+                            <p>Next: {formatDistance(task.next_due_mileage)}</p>
+                            <p>Every {formatDistance(task.interval_miles)} / {task.interval_months} months</p>
                           </div>
                           <div className="flex flex-wrap gap-2 mt-3">
                             <Dialog open={completeTaskOpen === task.id} onOpenChange={(open) => setCompleteTaskOpen(open ? task.id : null)}>
