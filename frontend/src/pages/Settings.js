@@ -23,7 +23,7 @@ const API_URL = `${process.env.REACT_APP_BACKEND_URL || ''}/api`.replace(/([^:]\
 
 export default function Settings() {
   const { theme, setTheme } = useTheme();
-  const { language, setLanguage, t, languageNames } = useLanguage();
+  const { language, setLanguage, t, languageNames, distanceUnit, setDistanceUnit } = useLanguage();
   const [settings, setSettings] = useState({
     email_reminders: true,
     push_notifications: true,
