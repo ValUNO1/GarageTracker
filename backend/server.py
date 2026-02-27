@@ -147,14 +147,6 @@ class MileageLogResponse(BaseModel):
     date: str
     notes: Optional[str] = None
 
-class ChatMessage(BaseModel):
-    message: str
-    car_id: Optional[str] = None
-
-class ChatResponse(BaseModel):
-    response: str
-    suggestions: Optional[List[str]] = None
-
 class NotificationCreate(BaseModel):
     title: str
     message: str
