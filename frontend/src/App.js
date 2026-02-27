@@ -59,7 +59,6 @@ function App() {
               <Route index element={<Navigate to="/dashboard" replace />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="cars/:carId" element={<CarDetail />} />
-              <Route path="ai-mechanic" element={<AIMechanic />} />
               <Route path="nearby-mechanics" element={<NearbyMechanics />} />
               <Route path="settings" element={<Settings />} />
             </Route>
