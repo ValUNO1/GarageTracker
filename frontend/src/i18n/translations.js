@@ -1457,7 +1457,7 @@ export const translations = {
     // Settings
     managePreferences: "Gérez vos préférences et notifications",
     appearance: "Apparence",
-    customizeAppearance: "Personnalisez l'apparence d'AutoTrack",
+    customizeAppearance: "Personnalisez l'apparence de Garage Tracker",
     theme: "Thème",
     chooseLightDark: "Choisissez le mode clair ou sombre",
     light: "Clair",
