@@ -31,7 +31,7 @@ import {
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 
-const API_URL = process.env.REACT_APP_BACKEND_URL + '/api';
+const API_URL = `${process.env.REACT_APP_BACKEND_URL || ''}/api`.replace(/([^:]\/)\/+/g, '$1');
 
 const maintenanceIcons = {
   oil_change: Droplet,
