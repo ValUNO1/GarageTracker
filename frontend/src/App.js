@@ -7,7 +7,6 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import CarDetail from "./pages/CarDetail";
-import AIMechanic from "./pages/AIMechanic";
 import Settings from "./pages/Settings";
 import NearbyMechanics from "./pages/NearbyMechanics";
 import "./App.css";
