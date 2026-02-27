@@ -159,8 +159,8 @@ export default function Settings() {
               <Bell className="w-5 h-5 text-indigo-600" />
             </div>
             <div>
-              <CardTitle className="text-lg font-outfit">Notifications</CardTitle>
-              <CardDescription>Configure how you receive reminders</CardDescription>
+              <CardTitle className="text-lg font-outfit">{t('notifications')}</CardTitle>
+              <CardDescription>{t('configureReminders')}</CardDescription>
             </div>
           </div>
         </CardHeader>
@@ -169,8 +169,8 @@ export default function Settings() {
             <div className="flex items-center gap-3">
               <Mail className="w-5 h-5 text-muted-foreground" />
               <div>
-                <Label className="text-base">Email Reminders</Label>
-                <p className="text-sm text-muted-foreground">Get notified via email when maintenance is due</p>
+                <Label className="text-base">{t('emailReminders')}</Label>
+                <p className="text-sm text-muted-foreground">{t('emailRemindersDesc')}</p>
               </div>
             </div>
             <Switch
@@ -184,8 +184,8 @@ export default function Settings() {
             <div className="flex items-center gap-3">
               <Bell className="w-5 h-5 text-muted-foreground" />
               <div>
-                <Label className="text-base">In-App Notifications</Label>
-                <p className="text-sm text-muted-foreground">Show notifications within the app</p>
+                <Label className="text-base">{t('inAppNotifications')}</Label>
+                <p className="text-sm text-muted-foreground">{t('inAppNotificationsDesc')}</p>
               </div>
             </div>
             <Switch
@@ -197,8 +197,8 @@ export default function Settings() {
 
           <div className="flex items-center justify-between">
             <div>
-              <Label className="text-base">Reminder Lead Time</Label>
-              <p className="text-sm text-muted-foreground">How many days before due date to remind you</p>
+              <Label className="text-base">{t('reminderLeadTime')}</Label>
+              <p className="text-sm text-muted-foreground">{t('reminderLeadTimeDesc')}</p>
             </div>
             <Select 
               value={settings.reminder_days_before?.toString()} 
@@ -208,10 +208,10 @@ export default function Settings() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="3">3 days</SelectItem>
-                <SelectItem value="7">7 days</SelectItem>
-                <SelectItem value="14">14 days</SelectItem>
-                <SelectItem value="30">30 days</SelectItem>
+                <SelectItem value="3">3 {t('days')}</SelectItem>
+                <SelectItem value="7">7 {t('days')}</SelectItem>
+                <SelectItem value="14">14 {t('days')}</SelectItem>
+                <SelectItem value="30">30 {t('days')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
