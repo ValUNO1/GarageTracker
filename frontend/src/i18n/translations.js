@@ -247,6 +247,14 @@ export const translations = {
     findMechanics: "Buscar Mecánicos",
     settings: "Configuración",
     
+    // Distance Unit
+    distanceUnit: "Unidad de Distancia",
+    selectDistanceUnit: "Elige entre millas y kilómetros",
+    miles: "Millas",
+    kilometers: "Kilómetros",
+    mi: "mi",
+    km: "km",
+    
     // Dashboard
     overview: "Resumen del mantenimiento de tu vehículo",
     addVehicle: "Agregar Vehículo",
