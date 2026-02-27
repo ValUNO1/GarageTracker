@@ -170,11 +170,92 @@ export default function Dashboard() {
               Add Vehicle
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-md">
+          <DialogContent className="sm:max-w-lg">
             <DialogHeader>
               <DialogTitle className="font-outfit">Add New Vehicle</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleAddCar} className="space-y-4 mt-4">
+              {/* Vehicle Image */}
+              <div className="space-y-3">
+                <Label>Vehicle Photo (Optional)</Label>
+                <Tabs value={imageMethod} onValueChange={setImageMethod} className="w-full">
+                  <TabsList className="grid w-full grid-cols-2 h-9">
+                    <TabsTrigger value="upload" className="text-xs" data-testid="image-upload-tab">
+                      <Upload className="w-3.5 h-3.5 mr-1.5" />
+                      Upload
+                    </TabsTrigger>
+                    <TabsTrigger value="url" className="text-xs" data-testid="image-url-tab">
+                      <LinkIcon className="w-3.5 h-3.5 mr-1.5" />
+                      Image URL
+                    </TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="upload" className="mt-3">
+                    {imagePreview && imageMethod === 'upload' ? (
+                      <div className="relative">
+                        <img 
+                          src={imagePreview} 
+                          alt="Preview" 
+                          className="w-full h-32 object-cover rounded-lg border"
+                        />
+                        <Button
+                          type="button"
+                          variant="destructive"
+                          size="icon"
+                          className="absolute top-2 right-2 h-7 w-7"
+                          onClick={clearImage}
+                        >
+                          <X className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    ) : (
+                      <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                        <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                          <ImageIcon className="w-8 h-8 text-slate-400 mb-2" />
+                          <p className="text-sm text-muted-foreground">Click to upload image</p>
+                          <p className="text-xs text-muted-foreground mt-1">PNG, JPG up to 5MB</p>
+                        </div>
+                        <input 
+                          type="file" 
+                          className="hidden" 
+                          accept="image/*"
+                          onChange={handleImageUpload}
+                          data-testid="image-file-input"
+                        />
+                      </label>
+                    )}
+                  </TabsContent>
+                  <TabsContent value="url" className="mt-3">
+                    <div className="space-y-3">
+                      <Input
+                        placeholder="https://example.com/car-image.jpg"
+                        value={newCar.image_url}
+                        onChange={(e) => handleImageUrlChange(e.target.value)}
+                        data-testid="image-url-input"
+                      />
+                      {imagePreview && imageMethod === 'url' && (
+                        <div className="relative">
+                          <img 
+                            src={imagePreview} 
+                            alt="Preview" 
+                            className="w-full h-32 object-cover rounded-lg border"
+                            onError={() => setImagePreview(null)}
+                          />
+                          <Button
+                            type="button"
+                            variant="destructive"
+                            size="icon"
+                            className="absolute top-2 right-2 h-7 w-7"
+                            onClick={clearImage}
+                          >
+                            <X className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+                  </TabsContent>
+                </Tabs>
+              </div>
+
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="make">Make</Label>
