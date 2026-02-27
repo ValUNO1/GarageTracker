@@ -121,12 +121,12 @@ export default function AIMechanic() {
               <CardTitle className="text-sm font-medium">Select Vehicle</CardTitle>
             </CardHeader>
             <CardContent>
-              <Select value={selectedCarId} onValueChange={setSelectedCarId}>
+              <Select value={selectedCarId || "none"} onValueChange={(v) => setSelectedCarId(v === "none" ? "" : v)}>
                 <SelectTrigger data-testid="car-select">
                   <SelectValue placeholder="Choose a car (optional)" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">No specific car</SelectItem>
+                  <SelectItem value="none">No specific car</SelectItem>
                   {cars.map(car => (
                     <SelectItem key={car.id} value={car.id}>
                       {car.year} {car.make} {car.model}
