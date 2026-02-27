@@ -601,7 +601,7 @@ export const translations = {
     // Settings
     managePreferences: "Gestionează preferințele și notificările tale",
     appearance: "Aspect",
-    customizeAppearance: "Personalizează cum arată AutoTrack",
+    customizeAppearance: "Personalizează cum arată Garage Tracker",
     theme: "Temă",
     chooseLightDark: "Alege modul luminos sau întunecat",
     light: "Luminos",
