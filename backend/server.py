@@ -12,7 +12,6 @@ import uuid
 from datetime import datetime, timezone, timedelta
 import jwt
 import bcrypt
-from emergentintegrations.llm.chat import LlmChat, UserMessage
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
@@ -28,9 +27,6 @@ db = client[os.environ['DB_NAME']]
 JWT_SECRET = os.environ.get('JWT_SECRET', 'autotrack-secret')
 JWT_ALGORITHM = "HS256"
 JWT_EXPIRATION_HOURS = 24
-
-# LLM Configuration
-EMERGENT_LLM_KEY = os.environ.get('EMERGENT_LLM_KEY')
 
 # SendGrid Configuration
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
