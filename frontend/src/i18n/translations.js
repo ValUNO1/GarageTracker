@@ -1243,7 +1243,7 @@ export const translations = {
     // Settings
     managePreferences: "管理您的偏好设置和通知",
     appearance: "外观",
-    customizeAppearance: "自定义AutoTrack的外观",
+    customizeAppearance: "自定义Garage Tracker的外观",
     theme: "主题",
     chooseLightDark: "选择浅色或深色模式",
     light: "浅色",
