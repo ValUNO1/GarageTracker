@@ -425,30 +425,30 @@ export default function CarDetail() {
       {/* Tabs */}
       <Tabs defaultValue="maintenance" className="space-y-6">
         <TabsList className="bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
-          <TabsTrigger value="maintenance" className="rounded-md" data-testid="tab-maintenance">Maintenance</TabsTrigger>
-          <TabsTrigger value="mileage" className="rounded-md" data-testid="tab-mileage">Mileage History</TabsTrigger>
+          <TabsTrigger value="maintenance" className="rounded-md" data-testid="tab-maintenance">{t('maintenance')}</TabsTrigger>
+          <TabsTrigger value="mileage" className="rounded-md" data-testid="tab-mileage">{t('mileageHistory')}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="maintenance" className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-outfit font-semibold">Maintenance Tasks</h2>
+            <h2 className="text-lg font-outfit font-semibold">{t('maintenanceTasks')}</h2>
             <Dialog open={addTaskOpen} onOpenChange={setAddTaskOpen}>
               <DialogTrigger asChild>
                 <Button className="bg-indigo-600 hover:bg-indigo-700" data-testid="add-task-button">
                   <Plus className="w-4 h-4 mr-2" />
-                  Add Task
+                  {t('addTask')}
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-md">
                 <DialogHeader>
-                  <DialogTitle>Add Maintenance Task</DialogTitle>
+                  <DialogTitle>{t('addMaintenanceTask')}</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleAddTask} className="space-y-4 mt-4">
                   <div className="space-y-2">
-                    <Label>Task Type</Label>
+                    <Label>{t('taskType')}</Label>
                     <Select value={newTask.task_type} onValueChange={handleTaskTypeChange}>
                       <SelectTrigger data-testid="task-type-select">
-                        <SelectValue placeholder="Select task type" />
+                        <SelectValue placeholder={t('selectTaskType')} />
                       </SelectTrigger>
                       <SelectContent>
                         {maintenanceTypes.map(type => (
@@ -458,7 +458,7 @@ export default function CarDetail() {
                     </Select>
                   </div>
                   <div className="space-y-2">
-                    <Label>Last Performed At (Miles)</Label>
+                    <Label>{t('lastPerformedAt')}</Label>
                     <Input
                       type="number"
                       value={newTask.last_performed_mileage}
@@ -467,7 +467,7 @@ export default function CarDetail() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label>Last Performed Date</Label>
+                    <Label>{t('lastPerformedDate')}</Label>
                     <Popover>
                       <PopoverTrigger asChild>
                         <Button variant="outline" className="w-full justify-start">
@@ -482,7 +482,7 @@ export default function CarDetail() {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label>Interval (Miles)</Label>
+                      <Label>{t('intervalMiles')}</Label>
                       <Input
                         type="number"
                         value={newTask.interval_miles}
@@ -490,7 +490,7 @@ export default function CarDetail() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label>Interval (Months)</Label>
+                      <Label>{t('intervalMonths')}</Label>
                       <Input
                         type="number"
                         value={newTask.interval_months}
@@ -499,14 +499,14 @@ export default function CarDetail() {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label>Notes (Optional)</Label>
+                    <Label>{t('notesOptional')}</Label>
                     <Textarea
                       value={newTask.notes}
                       onChange={(e) => setNewTask({ ...newTask, notes: e.target.value })}
                     />
                   </div>
                   <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700" data-testid="submit-task-button">
-                    Add Task
+                    {t('addTask')}
                   </Button>
                 </form>
               </DialogContent>
@@ -517,9 +517,9 @@ export default function CarDetail() {
             <Card className="card-base">
               <CardContent className="py-12 text-center">
                 <Wrench className="w-12 h-12 mx-auto text-muted-foreground mb-3" />
-                <p className="text-muted-foreground">No maintenance tasks yet</p>
+                <p className="text-muted-foreground">{t('noMaintenanceTasksYet')}</p>
                 <Button variant="link" className="text-indigo-600 mt-2" onClick={() => setAddTaskOpen(true)}>
-                  Add your first task
+                  {t('addFirstTask')}
                 </Button>
               </CardContent>
             </Card>
@@ -555,9 +555,9 @@ export default function CarDetail() {
                               task.status === 'due_soon' ? 'status-due-soon' :
                               'status-good'
                             }>
-                              {isReplacementRequested ? 'Needs Replacement' : 
-                               task.status === 'overdue' ? 'Overdue' : 
-                               task.status === 'due_soon' ? 'Due Soon' : 'Good'}
+                              {isReplacementRequested ? t('needsReplacement') : 
+                               task.status === 'overdue' ? t('overdue') : 
+                               task.status === 'due_soon' ? t('dueSoon') : t('good')}
                             </Badge>
                           </div>
                           
@@ -565,32 +565,32 @@ export default function CarDetail() {
                           {isReplacementRequested && task.replacement_reason && (
                             <div className="mt-2 p-2 rounded-lg bg-purple-50 dark:bg-purple-900/10 border border-purple-200 dark:border-purple-800">
                               <p className="text-sm text-purple-700 dark:text-purple-300">
-                                <strong>Reason:</strong> {task.replacement_reason}
+                                <strong>{t('reason')}:</strong> {task.replacement_reason}
                               </p>
                             </div>
                           )}
                           
                           <div className="mt-2 space-y-1 text-sm text-muted-foreground">
-                            <p>Last: {formatDistance(task.last_performed_mileage)}</p>
-                            <p>Next: {formatDistance(task.next_due_mileage)}</p>
-                            <p>Every {formatDistance(task.interval_miles)} / {task.interval_months} months</p>
+                            <p>{t('last')}: {formatDistance(task.last_performed_mileage)}</p>
+                            <p>{t('next')}: {formatDistance(task.next_due_mileage)}</p>
+                            <p>{t('every')} {formatDistance(task.interval_miles)} / {task.interval_months} {t('months')}</p>
                           </div>
                           <div className="flex flex-wrap gap-2 mt-3">
                             <Dialog open={completeTaskOpen === task.id} onOpenChange={(open) => setCompleteTaskOpen(open ? task.id : null)}>
                               <DialogTrigger asChild>
                                 <Button size="sm" className="bg-indigo-600 hover:bg-indigo-700" data-testid={`complete-task-${task.id}`}>
                                   <CheckCircle2 className="w-4 h-4 mr-1" />
-                                  Complete
+                                  {t('complete')}
                                 </Button>
                               </DialogTrigger>
                               <DialogContent>
                                 <DialogHeader>
-                                  <DialogTitle>Complete Maintenance</DialogTitle>
+                                  <DialogTitle>{t('completeMaintenance')}</DialogTitle>
                                 </DialogHeader>
                                 <div className="space-y-4 mt-4">
-                                  <p>Mark <strong className="capitalize">{task.task_type.replace(/_/g, ' ')}</strong> as complete?</p>
+                                  <p>{t('markAsComplete')}</p>
                                   <div className="space-y-2">
-                                    <Label>Current Mileage</Label>
+                                    <Label>{t('currentMileage')}</Label>
                                     <Input
                                       type="number"
                                       value={completeMileage}
@@ -599,7 +599,7 @@ export default function CarDetail() {
                                     />
                                   </div>
                                   <Button onClick={() => handleCompleteTask(task.id)} className="w-full bg-indigo-600 hover:bg-indigo-700">
-                                    Mark Complete
+                                    {t('markComplete')}
                                   </Button>
                                 </div>
                               </DialogContent>
@@ -614,42 +614,42 @@ export default function CarDetail() {
                                 <DialogTrigger asChild>
                                   <Button size="sm" variant="outline" className="border-purple-300 text-purple-600 hover:bg-purple-50 dark:border-purple-700 dark:text-purple-400 dark:hover:bg-purple-900/20" data-testid={`request-replacement-${task.id}`}>
                                     <AlertOctagon className="w-4 h-4 mr-1" />
-                                    Request Replace
+                                    {t('requestReplace')}
                                   </Button>
                                 </DialogTrigger>
                                 <DialogContent>
                                   <DialogHeader>
-                                    <DialogTitle>Request Early Replacement</DialogTitle>
+                                    <DialogTitle>{t('requestEarlyReplacement')}</DialogTitle>
                                   </DialogHeader>
                                   <div className="space-y-4 mt-4">
                                     <p className="text-sm text-muted-foreground">
-                                      Request an early replacement for <strong className="capitalize text-foreground">{task.task_type.replace(/_/g, ' ')}</strong> before the scheduled maintenance time.
+                                      {t('requestEarlyReplacementDesc')} <strong className="capitalize text-foreground">{task.task_type.replace(/_/g, ' ')}</strong> {t('beforeScheduledTime')}
                                     </p>
                                     <div className="space-y-2">
-                                      <Label>Reason for replacement</Label>
+                                      <Label>{t('reasonForReplacement')}</Label>
                                       <Select value={replacementReason} onValueChange={setReplacementReason}>
                                         <SelectTrigger>
-                                          <SelectValue placeholder="Select a reason" />
+                                          <SelectValue placeholder={t('selectReason')} />
                                         </SelectTrigger>
                                         <SelectContent>
-                                          <SelectItem value="Low fluid level">Low fluid level</SelectItem>
-                                          <SelectItem value="Fluid looks dirty/dark">Fluid looks dirty/dark</SelectItem>
-                                          <SelectItem value="Strange noise detected">Strange noise detected</SelectItem>
-                                          <SelectItem value="Performance issues">Performance issues</SelectItem>
-                                          <SelectItem value="Warning light on">Warning light on</SelectItem>
-                                          <SelectItem value="Leak detected">Leak detected</SelectItem>
-                                          <SelectItem value="Mechanic recommendation">Mechanic recommendation</SelectItem>
-                                          <SelectItem value="Other">Other</SelectItem>
+                                          <SelectItem value="Low fluid level">{t('lowFluidLevel')}</SelectItem>
+                                          <SelectItem value="Fluid looks dirty/dark">{t('fluidLooksDirty')}</SelectItem>
+                                          <SelectItem value="Strange noise detected">{t('strangeNoiseDetected')}</SelectItem>
+                                          <SelectItem value="Performance issues">{t('performanceIssues')}</SelectItem>
+                                          <SelectItem value="Warning light on">{t('warningLightOn')}</SelectItem>
+                                          <SelectItem value="Leak detected">{t('leakDetected')}</SelectItem>
+                                          <SelectItem value="Mechanic recommendation">{t('mechanicRecommendation')}</SelectItem>
+                                          <SelectItem value="Other">{t('other')}</SelectItem>
                                         </SelectContent>
                                       </Select>
                                     </div>
                                     {replacementReason === 'Other' && (
                                       <div className="space-y-2">
-                                        <Label>Describe the issue</Label>
+                                        <Label>{t('describeIssue')}</Label>
                                         <Textarea
                                           value={replacementReason === 'Other' ? '' : replacementReason}
                                           onChange={(e) => setReplacementReason(e.target.value)}
-                                          placeholder="Describe why replacement is needed..."
+                                          placeholder={t('describeIssue')}
                                         />
                                       </div>
                                     )}
@@ -659,7 +659,7 @@ export default function CarDetail() {
                                       disabled={!replacementReason}
                                     >
                                       <AlertOctagon className="w-4 h-4 mr-2" />
-                                      Request Replacement
+                                      {t('requestReplacement')}
                                     </Button>
                                   </div>
                                 </DialogContent>
@@ -673,7 +673,7 @@ export default function CarDetail() {
                                 data-testid={`cancel-replacement-${task.id}`}
                               >
                                 <X className="w-4 h-4 mr-1" />
-                                Cancel Request
+                                {t('cancelRequest')}
                               </Button>
                             )}
                             
@@ -694,13 +694,13 @@ export default function CarDetail() {
         <TabsContent value="mileage">
           <Card className="card-base">
             <CardHeader>
-              <CardTitle className="text-lg font-outfit">Mileage History</CardTitle>
+              <CardTitle className="text-lg font-outfit">{t('mileageHistory')}</CardTitle>
             </CardHeader>
             <CardContent>
               {mileageLogs.length === 0 ? (
                 <div className="py-8 text-center">
                   <Gauge className="w-12 h-12 mx-auto text-muted-foreground mb-3" />
-                  <p className="text-muted-foreground">No mileage logs yet</p>
+                  <p className="text-muted-foreground">{t('noMileageLogsYet')}</p>
                 </div>
               ) : (
                 <div className="space-y-3">
