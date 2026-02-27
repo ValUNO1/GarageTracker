@@ -33,6 +33,14 @@ export const translations = {
     findMechanics: "Find Mechanics",
     settings: "Settings",
     
+    // Distance Unit
+    distanceUnit: "Distance Unit",
+    selectDistanceUnit: "Choose between miles and kilometers",
+    miles: "Miles",
+    kilometers: "Kilometers",
+    mi: "mi",
+    km: "km",
+    
     // Dashboard
     overview: "Overview of your vehicle maintenance",
     addVehicle: "Add Vehicle",
