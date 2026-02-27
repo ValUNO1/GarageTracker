@@ -1103,6 +1103,14 @@ export const translations = {
     findMechanics: "查找修理厂",
     settings: "设置",
     
+    // Distance Unit
+    distanceUnit: "距离单位",
+    selectDistanceUnit: "选择英里或公里",
+    miles: "英里",
+    kilometers: "公里",
+    mi: "mi",
+    km: "km",
+    
     // Dashboard
     overview: "车辆保养概览",
     addVehicle: "添加车辆",
