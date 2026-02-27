@@ -707,7 +707,7 @@ export default function CarDetail() {
                   {mileageLogs.map(log => (
                     <div key={log.id} className="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
                       <div>
-                        <p className="font-medium">{log.mileage.toLocaleString()} miles</p>
+                        <p className="font-medium">{formatDistance(log.mileage)}</p>
                         <p className="text-sm text-muted-foreground">
                           {format(new Date(log.date), 'PPP')}
                           {log.notes && ` • ${log.notes}`}
