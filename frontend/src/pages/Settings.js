@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Label } from '../components/ui/label';
@@ -13,13 +14,15 @@ import {
   Bell, 
   Mail, 
   Save,
-  Palette
+  Palette,
+  Globe
 } from 'lucide-react';
 
 const API_URL = `${process.env.REACT_APP_BACKEND_URL || ''}/api`.replace(/([^:]\/)\/+/g, '$1');
 
 export default function Settings() {
   const { theme, setTheme } = useTheme();
+  const { language, setLanguage, t, languageNames } = useLanguage();
   const [settings, setSettings] = useState({
     email_reminders: true,
     push_notifications: true,
@@ -47,7 +50,7 @@ export default function Settings() {
     setSaving(true);
     try {
       await axios.put(`${API_URL}/settings`, settings);
-      toast.success('Settings saved!');
+      toast.success(t('settingsSaved'));
     } catch (error) {
       toast.error('Failed to save settings');
     } finally {
