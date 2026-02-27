@@ -437,7 +437,7 @@ export default function Dashboard() {
                         </p>
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
                           <Gauge className="w-3.5 h-3.5" />
-                          <span>{car.current_mileage?.toLocaleString() || 0} miles</span>
+                          <span>{formatDistance(car.current_mileage)}</span>
                         </div>
                       </div>
                       <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-indigo-600 transition-colors" />
