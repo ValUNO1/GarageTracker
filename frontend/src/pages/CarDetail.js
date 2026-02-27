@@ -57,7 +57,7 @@ const carPlaceholders = [
 export default function CarDetail() {
   const { carId } = useParams();
   const navigate = useNavigate();
-  const { formatDistance, getDistanceUnitShort } = useLanguage();
+  const { formatDistance, getDistanceUnitShort, t } = useLanguage();
   const [car, setCar] = useState(null);
   const [tasks, setTasks] = useState([]);
   const [mileageLogs, setMileageLogs] = useState([]);
@@ -104,7 +104,7 @@ export default function CarDetail() {
       setEditCar(carRes.data);
       setNewMileage({ mileage: carRes.data.current_mileage || 0, notes: '' });
     } catch (error) {
-      toast.error('Failed to load car details');
+      toast.error(t('failedToLoad'));
       navigate('/dashboard');
     } finally {
       setLoading(false);
@@ -119,62 +119,62 @@ export default function CarDetail() {
         ...newTask,
         last_performed_date: selectedDate.toISOString()
       });
-      toast.success('Maintenance task added!');
+      toast.success(t('taskAddedSuccess'));
       setAddTaskOpen(false);
       setNewTask({ task_type: '', description: '', last_performed_mileage: 0, interval_miles: 5000, interval_months: 6, notes: '' });
       fetchCarData();
     } catch (error) {
-      toast.error('Failed to add task');
+      toast.error(t('failedToAdd'));
     }
   };
 
   const handleCompleteTask = async (taskId) => {
     try {
       await axios.post(`${API_URL}/maintenance/${taskId}/complete?mileage=${completeMileage}`);
-      toast.success('Maintenance completed!');
+      toast.success(t('maintenanceCompleted'));
       setCompleteTaskOpen(null);
       fetchCarData();
     } catch (error) {
-      toast.error('Failed to complete task');
+      toast.error(t('failedToUpdate'));
     }
   };
 
   const handleDeleteTask = async (taskId) => {
-    if (!window.confirm('Are you sure you want to delete this task?')) return;
+    if (!window.confirm(t('confirmDeleteTask'))) return;
     try {
       await axios.delete(`${API_URL}/maintenance/${taskId}`);
-      toast.success('Task deleted');
+      toast.success(t('taskDeletedSuccess'));
       fetchCarData();
     } catch (error) {
-      toast.error('Failed to delete task');
+      toast.error(t('failedToDelete'));
     }
   };
 
   const handleRequestReplacement = async (taskId) => {
     if (!replacementReason.trim()) {
-      toast.error('Please provide a reason for replacement');
+      toast.error(t('reasonForReplacement'));
       return;
     }
     try {
       await axios.post(`${API_URL}/maintenance/${taskId}/request-replacement`, {
         reason: replacementReason
       });
-      toast.success('Replacement requested!');
+      toast.success(t('replacementRequested'));
       setReplacementOpen(null);
       setReplacementReason('');
       fetchCarData();
     } catch (error) {
-      toast.error('Failed to request replacement');
+      toast.error(t('failedToUpdate'));
     }
   };
 
   const handleCancelReplacement = async (taskId) => {
     try {
       await axios.post(`${API_URL}/maintenance/${taskId}/cancel-replacement`);
-      toast.success('Replacement request cancelled');
+      toast.success(t('replacementCancelled'));
       fetchCarData();
     } catch (error) {
-      toast.error('Failed to cancel replacement');
+      toast.error(t('failedToUpdate'));
     }
   };
 
@@ -187,11 +187,11 @@ export default function CarDetail() {
         notes: newMileage.notes,
         date: selectedDate.toISOString()
       });
-      toast.success('Mileage logged!');
+      toast.success(t('mileageLogged'));
       setAddMileageOpen(false);
       fetchCarData();
     } catch (error) {
-      toast.error('Failed to log mileage');
+      toast.error(t('failedToAdd'));
     }
   };
 
@@ -199,22 +199,22 @@ export default function CarDetail() {
     e.preventDefault();
     try {
       await axios.put(`${API_URL}/cars/${carId}`, editCar);
-      toast.success('Car updated!');
+      toast.success(t('carUpdatedSuccess'));
       setEditCarOpen(false);
       fetchCarData();
     } catch (error) {
-      toast.error('Failed to update car');
+      toast.error(t('failedToUpdate'));
     }
   };
 
   const handleDeleteCar = async () => {
-    if (!window.confirm('Are you sure you want to delete this vehicle? This will also delete all maintenance tasks.')) return;
+    if (!window.confirm(t('confirmDeleteCar'))) return;
     try {
       await axios.delete(`${API_URL}/cars/${carId}`);
-      toast.success('Vehicle deleted');
+      toast.success(t('carDeletedSuccess'));
       navigate('/dashboard');
     } catch (error) {
-      toast.error('Failed to delete vehicle');
+      toast.error(t('failedToDelete'));
     }
   };
 
