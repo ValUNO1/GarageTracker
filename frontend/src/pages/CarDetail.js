@@ -261,7 +261,7 @@ export default function CarDetail() {
         </Button>
         <div className="flex-1">
           <h1 className="text-2xl font-outfit font-bold">{car.year} {car.make} {car.model}</h1>
-          <p className="text-muted-foreground">{car.license_plate || 'No plate'} • {car.color || 'Unknown color'}</p>
+          <p className="text-muted-foreground">{car.license_plate || t('noPlate')} • {car.color || t('unknownColor')}</p>
         </div>
         <Dialog open={editCarOpen} onOpenChange={setEditCarOpen}>
           <DialogTrigger asChild>
@@ -271,35 +271,35 @@ export default function CarDetail() {
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Edit Vehicle</DialogTitle>
+              <DialogTitle>{t('edit')} {t('vehicles')}</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleUpdateCar} className="space-y-4 mt-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label>Make</Label>
+                  <Label>{t('make')}</Label>
                   <Input value={editCar.make || ''} onChange={(e) => setEditCar({ ...editCar, make: e.target.value })} />
                 </div>
                 <div className="space-y-2">
-                  <Label>Model</Label>
+                  <Label>{t('model')}</Label>
                   <Input value={editCar.model || ''} onChange={(e) => setEditCar({ ...editCar, model: e.target.value })} />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label>Year</Label>
+                  <Label>{t('year')}</Label>
                   <Input type="number" value={editCar.year || ''} onChange={(e) => setEditCar({ ...editCar, year: parseInt(e.target.value) })} />
                 </div>
                 <div className="space-y-2">
-                  <Label>Color</Label>
+                  <Label>{t('color')}</Label>
                   <Input value={editCar.color || ''} onChange={(e) => setEditCar({ ...editCar, color: e.target.value })} />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label>License Plate</Label>
+                <Label>{t('licensePlate')}</Label>
                 <Input value={editCar.license_plate || ''} onChange={(e) => setEditCar({ ...editCar, license_plate: e.target.value })} />
               </div>
               <div className="flex gap-2">
-                <Button type="submit" className="flex-1 bg-indigo-600 hover:bg-indigo-700">Save Changes</Button>
+                <Button type="submit" className="flex-1 bg-indigo-600 hover:bg-indigo-700">{t('save')}</Button>
                 <Button type="button" variant="destructive" onClick={handleDeleteCar} data-testid="delete-car-button">
                   <Trash2 className="w-4 h-4" />
                 </Button>
@@ -325,7 +325,7 @@ export default function CarDetail() {
                     <Gauge className="w-6 h-6 text-indigo-600" />
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground">Current Mileage</p>
+                    <p className="text-sm text-muted-foreground">{t('currentMileage')}</p>
                     <p className="text-2xl font-outfit font-bold">{formatDistance(car.current_mileage)}</p>
                   </div>
                 </div>
@@ -333,16 +333,16 @@ export default function CarDetail() {
                   <DialogTrigger asChild>
                     <Button className="bg-indigo-600 hover:bg-indigo-700" data-testid="update-mileage-button">
                       <Plus className="w-4 h-4 mr-2" />
-                      Update Mileage
+                      {t('updateMileage')}
                     </Button>
                   </DialogTrigger>
                   <DialogContent>
                     <DialogHeader>
-                      <DialogTitle>Log Mileage</DialogTitle>
+                      <DialogTitle>{t('logMileage')}</DialogTitle>
                     </DialogHeader>
                     <form onSubmit={handleAddMileage} className="space-y-4 mt-4">
                       <div className="space-y-2">
-                        <Label>Current Mileage</Label>
+                        <Label>{t('currentMileage')}</Label>
                         <Input
                           type="number"
                           value={newMileage.mileage}
@@ -351,7 +351,7 @@ export default function CarDetail() {
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label>Date</Label>
+                        <Label>{t('date')}</Label>
                         <Popover>
                           <PopoverTrigger asChild>
                             <Button variant="outline" className="w-full justify-start">
@@ -365,7 +365,7 @@ export default function CarDetail() {
                         </Popover>
                       </div>
                       <div className="space-y-2">
-                        <Label>Notes (Optional)</Label>
+                        <Label>{t('notesOptional')}</Label>
                         <Textarea
                           value={newMileage.notes}
                           onChange={(e) => setNewMileage({ ...newMileage, notes: e.target.value })}
@@ -373,7 +373,7 @@ export default function CarDetail() {
                         />
                       </div>
                       <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700">
-                        Log Mileage
+                        {t('logMileage')}
                       </Button>
                     </form>
                   </DialogContent>
@@ -385,27 +385,27 @@ export default function CarDetail() {
 
         <Card className="card-base">
           <CardHeader>
-            <CardTitle className="text-lg font-outfit">Health Status</CardTitle>
+            <CardTitle className="text-lg font-outfit">{t('healthStatus')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex items-center justify-between p-3 rounded-lg bg-emerald-50 dark:bg-emerald-900/20">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-                <span className="text-sm font-medium">Good</span>
+                <span className="text-sm font-medium">{t('good')}</span>
               </div>
               <span className="text-xl font-bold text-emerald-600">{statusCounts.good}</span>
             </div>
             <div className="flex items-center justify-between p-3 rounded-lg bg-amber-50 dark:bg-amber-900/20">
               <div className="flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-amber-600" />
-                <span className="text-sm font-medium">Due Soon</span>
+                <span className="text-sm font-medium">{t('dueSoon')}</span>
               </div>
               <span className="text-xl font-bold text-amber-600">{statusCounts.due_soon}</span>
             </div>
             <div className="flex items-center justify-between p-3 rounded-lg bg-red-50 dark:bg-red-900/20">
               <div className="flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-red-600" />
-                <span className="text-sm font-medium">Overdue</span>
+                <span className="text-sm font-medium">{t('overdue')}</span>
               </div>
               <span className="text-xl font-bold text-red-600">{statusCounts.overdue}</span>
             </div>
@@ -413,7 +413,7 @@ export default function CarDetail() {
               <div className="flex items-center justify-between p-3 rounded-lg bg-purple-50 dark:bg-purple-900/20">
                 <div className="flex items-center gap-2">
                   <AlertOctagon className="w-5 h-5 text-purple-600" />
-                  <span className="text-sm font-medium">Needs Replacement</span>
+                  <span className="text-sm font-medium">{t('needsReplacement')}</span>
                 </div>
                 <span className="text-xl font-bold text-purple-600">{statusCounts.replacement_requested}</span>
               </div>
