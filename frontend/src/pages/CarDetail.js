@@ -237,8 +237,14 @@ export default function CarDetail() {
   if (!car) return null;
 
   const getStatusCounts = () => {
-    const counts = { good: 0, due_soon: 0, overdue: 0 };
-    tasks.forEach(t => counts[t.status]++);
+    const counts = { good: 0, due_soon: 0, overdue: 0, replacement_requested: 0 };
+    tasks.forEach(t => {
+      if (counts.hasOwnProperty(t.status)) {
+        counts[t.status]++;
+      } else {
+        counts.good++;
+      }
+    });
     return counts;
   };
 
