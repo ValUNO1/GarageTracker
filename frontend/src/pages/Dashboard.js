@@ -52,6 +52,7 @@ const carPlaceholders = [
 ];
 
 export default function Dashboard() {
+  const { formatDistance, getDistanceUnitShort } = useLanguage();
   const [stats, setStats] = useState(null);
   const [cars, setCars] = useState([]);
   const [tasks, setTasks] = useState([]);
