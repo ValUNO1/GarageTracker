@@ -32,7 +32,7 @@ JWT_EXPIRATION_HOURS = 24
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 SENDER_EMAIL = os.environ.get('SENDER_EMAIL', 'noreply@autotrack.com')
 
-app = FastAPI(title="AutoTrack API")
+app = FastAPI(title="Garage Tracker API")
 api_router = APIRouter(prefix="/api")
 security = HTTPBearer()
 
