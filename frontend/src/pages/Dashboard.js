@@ -162,33 +162,33 @@ export default function Dashboard() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-outfit font-bold text-foreground">Dashboard</h1>
-          <p className="text-muted-foreground mt-1">Overview of your vehicle maintenance</p>
+          <h1 className="text-3xl font-outfit font-bold text-foreground">{t('dashboard')}</h1>
+          <p className="text-muted-foreground mt-1">{t('overview')}</p>
         </div>
         <Dialog open={addCarOpen} onOpenChange={setAddCarOpen}>
           <DialogTrigger asChild>
             <Button className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full px-6" data-testid="add-car-button">
               <Plus className="w-4 h-4 mr-2" />
-              Add Vehicle
+              {t('addVehicle')}
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-lg">
             <DialogHeader>
-              <DialogTitle className="font-outfit">Add New Vehicle</DialogTitle>
+              <DialogTitle className="font-outfit">{t('addNewVehicle')}</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleAddCar} className="space-y-4 mt-4">
               {/* Vehicle Image */}
               <div className="space-y-3">
-                <Label>Vehicle Photo (Optional)</Label>
+                <Label>{t('vehiclePhoto')}</Label>
                 <Tabs value={imageMethod} onValueChange={setImageMethod} className="w-full">
                   <TabsList className="grid w-full grid-cols-2 h-9">
                     <TabsTrigger value="upload" className="text-xs" data-testid="image-upload-tab">
                       <Upload className="w-3.5 h-3.5 mr-1.5" />
-                      Upload
+                      {t('upload')}
                     </TabsTrigger>
                     <TabsTrigger value="url" className="text-xs" data-testid="image-url-tab">
                       <LinkIcon className="w-3.5 h-3.5 mr-1.5" />
-                      Image URL
+                      {t('imageUrl')}
                     </TabsTrigger>
                   </TabsList>
                   <TabsContent value="upload" className="mt-3">
@@ -213,8 +213,8 @@ export default function Dashboard() {
                       <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
                           <ImageIcon className="w-8 h-8 text-slate-400 mb-2" />
-                          <p className="text-sm text-muted-foreground">Click to upload image</p>
-                          <p className="text-xs text-muted-foreground mt-1">PNG, JPG up to 5MB</p>
+                          <p className="text-sm text-muted-foreground">{t('clickToUpload')}</p>
+                          <p className="text-xs text-muted-foreground mt-1">{t('pngJpgUpTo5MB')}</p>
                         </div>
                         <input 
                           type="file" 
