@@ -461,6 +461,14 @@ export const translations = {
     findMechanics: "Găsește Mecanici",
     settings: "Setări",
     
+    // Distance Unit
+    distanceUnit: "Unitate de Distanță",
+    selectDistanceUnit: "Alege între mile și kilometri",
+    miles: "Mile",
+    kilometers: "Kilometri",
+    mi: "mi",
+    km: "km",
+    
     // Dashboard
     overview: "Prezentare generală a întreținerii vehiculului",
     addVehicle: "Adaugă Vehicul",
