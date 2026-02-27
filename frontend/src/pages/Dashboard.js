@@ -56,13 +56,16 @@ export default function Dashboard() {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [addCarOpen, setAddCarOpen] = useState(false);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [imageMethod, setImageMethod] = useState('upload');
   const [newCar, setNewCar] = useState({
     make: '',
     model: '',
     year: new Date().getFullYear(),
     color: '',
     license_plate: '',
-    current_mileage: 0
+    current_mileage: 0,
+    image_url: ''
   });
 
   useEffect(() => {
