@@ -63,6 +63,8 @@ export default function CarDetail() {
   const [addTaskOpen, setAddTaskOpen] = useState(false);
   const [addMileageOpen, setAddMileageOpen] = useState(false);
   const [completeTaskOpen, setCompleteTaskOpen] = useState(null);
+  const [replacementOpen, setReplacementOpen] = useState(null);
+  const [replacementReason, setReplacementReason] = useState('');
   const [editCarOpen, setEditCarOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
