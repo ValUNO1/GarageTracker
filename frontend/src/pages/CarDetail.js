@@ -326,7 +326,7 @@ export default function CarDetail() {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Current Mileage</p>
-                    <p className="text-2xl font-outfit font-bold">{car.current_mileage?.toLocaleString() || 0} mi</p>
+                    <p className="text-2xl font-outfit font-bold">{formatDistance(car.current_mileage)}</p>
                   </div>
                 </div>
                 <Dialog open={addMileageOpen} onOpenChange={setAddMileageOpen}>
