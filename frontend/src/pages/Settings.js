@@ -15,7 +15,8 @@ import {
   Mail, 
   Save,
   Palette,
-  Globe
+  Globe,
+  Ruler
 } from 'lucide-react';
 
 const API_URL = `${process.env.REACT_APP_BACKEND_URL || ''}/api`.replace(/([^:]\/)\/+/g, '$1');
