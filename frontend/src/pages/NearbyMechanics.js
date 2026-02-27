@@ -197,11 +197,10 @@ export default function NearbyMechanics() {
             </div>
 
             <div className="pt-4 border-t">
-              <p className="text-sm text-muted-foreground mb-3">Need help with a car problem?</p>
-              <Button asChild variant="outline" className="w-full">
-                <a href="/ai-mechanic" data-testid="ask-ai-link">
-                  Ask our AI Mechanic
-                </a>
+              <p className="text-sm text-muted-foreground mb-3">Need roadside assistance?</p>
+              <Button variant="outline" className="w-full" onClick={() => openGoogleMaps('roadside assistance near me')}>
+                <MapPin className="w-4 h-4 mr-2" />
+                Find Roadside Help
               </Button>
             </div>
           </CardContent>
