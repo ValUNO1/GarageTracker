@@ -105,6 +105,8 @@ class MaintenanceTaskCreate(BaseModel):
     interval_months: int = 6
     cost: Optional[float] = None
     notes: Optional[str] = None
+    replacement_requested: bool = False
+    replacement_reason: Optional[str] = None
 
 class MaintenanceTaskUpdate(BaseModel):
     task_type: Optional[str] = None
@@ -115,6 +117,8 @@ class MaintenanceTaskUpdate(BaseModel):
     interval_months: Optional[int] = None
     cost: Optional[float] = None
     notes: Optional[str] = None
+    replacement_requested: Optional[bool] = None
+    replacement_reason: Optional[str] = None
 
 class MaintenanceTaskResponse(BaseModel):
     id: str
@@ -130,7 +134,9 @@ class MaintenanceTaskResponse(BaseModel):
     interval_months: int
     cost: Optional[float] = None
     notes: Optional[str] = None
-    status: str  # good, due_soon, overdue
+    status: str  # good, due_soon, overdue, replacement_requested
+    replacement_requested: bool = False
+    replacement_reason: Optional[str] = None
     created_at: str
 
 class MileageLogCreate(BaseModel):
