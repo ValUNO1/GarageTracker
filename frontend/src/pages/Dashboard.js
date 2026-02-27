@@ -261,12 +261,6 @@ export default function Dashboard() {
             <CardTitle className="text-lg font-outfit">Quick Actions</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            <Link to="/ai-mechanic">
-              <Button variant="outline" className="w-full justify-start h-12 rounded-xl" data-testid="quick-ai-mechanic">
-                <Wrench className="w-5 h-5 mr-3 text-indigo-600" />
-                <span>Ask AI Mechanic</span>
-              </Button>
-            </Link>
             <Link to="/nearby-mechanics">
               <Button variant="outline" className="w-full justify-start h-12 rounded-xl" data-testid="quick-find-mechanics">
                 <Gauge className="w-5 h-5 mr-3 text-indigo-600" />
