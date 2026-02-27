@@ -99,7 +99,7 @@ export default function Dashboard() {
         carData.image_url = imagePreview;
       }
       await axios.post(`${API_URL}/cars`, carData);
-      toast.success('Car added successfully!');
+      toast.success(t('carAddedSuccess'));
       setAddCarOpen(false);
       setNewCar({ make: '', model: '', year: new Date().getFullYear(), color: '', license_plate: '', current_mileage: 0, image_url: '' });
       setImagePreview(null);
