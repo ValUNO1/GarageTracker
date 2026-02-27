@@ -22,7 +22,11 @@ import {
   Disc,
   Wind,
   Thermometer,
-  BatteryCharging
+  BatteryCharging,
+  Upload,
+  Link as LinkIcon,
+  X,
+  ImageIcon
 } from 'lucide-react';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL + '/api';
