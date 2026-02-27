@@ -1317,6 +1317,14 @@ export const translations = {
     findMechanics: "Trouver des mécaniciens",
     settings: "Paramètres",
     
+    // Distance Unit
+    distanceUnit: "Unité de distance",
+    selectDistanceUnit: "Choisissez entre miles et kilomètres",
+    miles: "Miles",
+    kilometers: "Kilomètres",
+    mi: "mi",
+    km: "km",
+    
     // Dashboard
     overview: "Aperçu de l'entretien de votre véhicule",
     addVehicle: "Ajouter un véhicule",
