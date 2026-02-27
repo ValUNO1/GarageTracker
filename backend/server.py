@@ -525,58 +525,6 @@ async def get_mileage_logs(car_id: str, current_user: dict = Depends(get_current
     ).sort("date", -1).to_list(500)
     return [MileageLogResponse(**log) for log in logs]
 
-# ==================== AI MECHANIC CHAT ====================
-
-@api_router.post("/chat", response_model=ChatResponse)
-async def chat_with_mechanic(chat_data: ChatMessage, current_user: dict = Depends(get_current_user)):
-    car_context = ""
-    if chat_data.car_id:
-        car = await db.cars.find_one({"id": chat_data.car_id, "user_id": current_user["id"]}, {"_id": 0})
-        if car:
-            tasks = await db.maintenance_tasks.find({"car_id": chat_data.car_id}, {"_id": 0}).to_list(50)
-            car_context = f"""
-User's car: {car.get('year')} {car.get('make')} {car.get('model')}
-Current Mileage: {car.get('current_mileage', 0)} miles
-Maintenance History: {', '.join([f"{t['task_type']} (last done at {t.get('last_performed_mileage', 'N/A')} miles)" for t in tasks]) if tasks else 'No maintenance records yet'}
-"""
-    
-    system_message = f"""You are AutoBot, a friendly and knowledgeable AI mechanic assistant. You help car owners with:
-1. Maintenance advice and schedules
-2. Diagnosing car problems based on symptoms
-3. Step-by-step repair guidance for common issues
-4. Recommendations on when to seek professional help
-5. Finding nearby mechanics when needed
-
-{car_context}
-
-Be helpful, clear, and safety-conscious. If a repair is dangerous or complex, recommend visiting a professional mechanic.
-When discussing repairs, provide clear step-by-step instructions when appropriate.
-If the user needs to find a mechanic, suggest they use the "Find Nearby Mechanics" feature in the app.
-Keep responses concise but thorough. Use bullet points for lists."""
-
-    try:
-        chat = LlmChat(
-            api_key=EMERGENT_LLM_KEY,
-            session_id=f"autotrack-{current_user['id']}-{datetime.now().timestamp()}",
-            system_message=system_message
-        ).with_model("gemini", "gemini-3-flash-preview")
-        
-        user_message = UserMessage(text=chat_data.message)
-        response = await chat.send_message(user_message)
-        
-        suggestions = []
-        if "oil" in chat_data.message.lower():
-            suggestions = ["How often should I change my oil?", "What type of oil should I use?"]
-        elif "brake" in chat_data.message.lower():
-            suggestions = ["How do I know if my brakes need replacing?", "What causes squeaky brakes?"]
-        elif "noise" in chat_data.message.lower() or "sound" in chat_data.message.lower():
-            suggestions = ["What could cause a knocking sound?", "Should I be worried about this noise?"]
-        
-        return ChatResponse(response=response, suggestions=suggestions)
-    except Exception as e:
-        logger.error(f"Chat error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to get response from AI mechanic")
-
 # ==================== NOTIFICATIONS ====================
 
 @api_router.get("/notifications", response_model=List[NotificationResponse])
