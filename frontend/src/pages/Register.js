@@ -52,7 +52,7 @@ export default function Register() {
             <div className="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center">
               <Car className="w-7 h-7 text-white" />
             </div>
-            <span className="text-2xl font-outfit font-bold text-foreground">AutoTrack</span>
+            <span className="text-2xl font-outfit font-bold text-foreground">Garage Tracker</span>
           </div>
         </div>
         
