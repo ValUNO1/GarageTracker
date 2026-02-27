@@ -106,7 +106,7 @@ export default function Dashboard() {
       setImageMethod('upload');
       fetchData();
     } catch (error) {
-      toast.error('Failed to add car');
+      toast.error(t('failedToAdd'));
     }
   };
 
