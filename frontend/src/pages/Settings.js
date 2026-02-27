@@ -103,6 +103,32 @@ export default function Settings() {
         </CardContent>
       </Card>
 
+      {/* Distance Unit */}
+      <Card className="card-base">
+        <CardHeader>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 flex items-center justify-center">
+              <Ruler className="w-5 h-5 text-indigo-600" />
+            </div>
+            <div>
+              <CardTitle className="text-lg font-outfit">{t('distanceUnit')}</CardTitle>
+              <CardDescription>{t('selectDistanceUnit')}</CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <Select value={distanceUnit} onValueChange={setDistanceUnit}>
+            <SelectTrigger className="w-48" data-testid="distance-unit-select">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="miles">{t('miles')}</SelectItem>
+              <SelectItem value="km">{t('kilometers')}</SelectItem>
+            </SelectContent>
+          </Select>
+        </CardContent>
+      </Card>
+
       {/* Appearance */}
       <Card className="card-base">
         <CardHeader>
