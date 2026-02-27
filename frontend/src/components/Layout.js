@@ -1,6 +1,7 @@
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 import { Button } from './ui/button';
 import { 
   DropdownMenu, 
@@ -26,6 +27,7 @@ import { useState } from 'react';
 export default function Layout() {
   const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -35,9 +37,9 @@ export default function Layout() {
   };
 
   const navItems = [
-    { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-    { to: '/nearby-mechanics', icon: MapPin, label: 'Find Mechanics' },
-    { to: '/settings', icon: Settings, label: 'Settings' },
+    { to: '/dashboard', icon: LayoutDashboard, label: t('dashboard') },
+    { to: '/nearby-mechanics', icon: MapPin, label: t('findMechanics') },
+    { to: '/settings', icon: Settings, label: t('settings') },
   ];
 
   return (
@@ -51,7 +53,7 @@ export default function Layout() {
               <div className="w-9 h-9 bg-indigo-600 rounded-lg flex items-center justify-center">
                 <Car className="w-5 h-5 text-white" />
               </div>
-              <span className="text-lg font-outfit font-bold text-foreground hidden sm:block">Garage Tracker</span>
+              <span className="text-lg font-outfit font-bold text-foreground hidden sm:block">{t('appName')}</span>
             </NavLink>
 
             {/* Desktop Navigation */}
@@ -67,7 +69,7 @@ export default function Layout() {
                         : 'text-muted-foreground hover:text-foreground hover:bg-slate-100 dark:hover:bg-slate-800'
                     }`
                   }
-                  data-testid={`nav-${item.label.toLowerCase().replace(' ', '-')}`}
+                  data-testid={`nav-${item.to.replace('/', '').replace('-', '-')}`}
                 >
                   <item.icon className="w-4 h-4" />
                   {item.label}
@@ -107,11 +109,11 @@ export default function Layout() {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={() => navigate('/settings')} data-testid="menu-settings">
                     <Settings className="w-4 h-4 mr-2" />
-                    Settings
+                    {t('settings')}
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={handleLogout} className="text-red-600" data-testid="menu-logout">
                     <LogOut className="w-4 h-4 mr-2" />
-                    Logout
+                    {t('logout')}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
