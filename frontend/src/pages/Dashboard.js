@@ -334,7 +334,7 @@ export default function Dashboard() {
                 </div>
               </div>
               <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700" data-testid="submit-car-button">
-                Add Vehicle
+                {t('addVehicle')}
               </Button>
             </form>
           </DialogContent>
@@ -346,35 +346,35 @@ export default function Dashboard() {
         {/* Main Stats Card */}
         <Card className="md:col-span-8 card-base animate-fade-in-delay-1" data-testid="stats-card">
           <CardHeader className="pb-2">
-            <CardTitle className="text-lg font-outfit">Maintenance Overview</CardTitle>
+            <CardTitle className="text-lg font-outfit">{t('maintenanceOverview')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50">
                 <div className="flex items-center gap-2 mb-2">
                   <Car className="w-5 h-5 text-indigo-600" />
-                  <span className="text-sm text-muted-foreground">Vehicles</span>
+                  <span className="text-sm text-muted-foreground">{t('vehicles')}</span>
                 </div>
                 <p className="text-3xl font-outfit font-bold">{stats?.total_cars || 0}</p>
               </div>
               <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-900/20">
                 <div className="flex items-center gap-2 mb-2">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-                  <span className="text-sm text-muted-foreground">Good</span>
+                  <span className="text-sm text-muted-foreground">{t('good')}</span>
                 </div>
                 <p className="text-3xl font-outfit font-bold text-emerald-600">{stats?.good || 0}</p>
               </div>
               <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-900/20">
                 <div className="flex items-center gap-2 mb-2">
                   <Clock className="w-5 h-5 text-amber-600" />
-                  <span className="text-sm text-muted-foreground">Due Soon</span>
+                  <span className="text-sm text-muted-foreground">{t('dueSoon')}</span>
                 </div>
                 <p className="text-3xl font-outfit font-bold text-amber-600">{stats?.due_soon || 0}</p>
               </div>
               <div className="p-4 rounded-xl bg-red-50 dark:bg-red-900/20">
                 <div className="flex items-center gap-2 mb-2">
                   <AlertTriangle className="w-5 h-5 text-red-600" />
-                  <span className="text-sm text-muted-foreground">Overdue</span>
+                  <span className="text-sm text-muted-foreground">{t('overdue')}</span>
                 </div>
                 <p className="text-3xl font-outfit font-bold text-red-600">{stats?.overdue || 0}</p>
               </div>
@@ -385,13 +385,13 @@ export default function Dashboard() {
         {/* Quick Actions Card */}
         <Card className="md:col-span-4 card-base animate-fade-in-delay-2" data-testid="quick-actions-card">
           <CardHeader className="pb-2">
-            <CardTitle className="text-lg font-outfit">Quick Actions</CardTitle>
+            <CardTitle className="text-lg font-outfit">{t('quickActions')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             <Link to="/nearby-mechanics">
               <Button variant="outline" className="w-full justify-start h-12 rounded-xl" data-testid="quick-find-mechanics">
                 <Gauge className="w-5 h-5 mr-3 text-indigo-600" />
-                <span>Find Nearby Mechanics</span>
+                <span>{t('findNearbyMechanics')}</span>
               </Button>
             </Link>
           </CardContent>
@@ -403,7 +403,7 @@ export default function Dashboard() {
         {/* Vehicles */}
         <Card className="card-base animate-fade-in-delay-2" data-testid="vehicles-card">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-lg font-outfit">My Vehicles</CardTitle>
+            <CardTitle className="text-lg font-outfit">{t('myVehicles')}</CardTitle>
             <Button variant="ghost" size="sm" onClick={() => setAddCarOpen(true)}>
               <Plus className="w-4 h-4" />
             </Button>
@@ -412,13 +412,13 @@ export default function Dashboard() {
             {cars.length === 0 ? (
               <div className="text-center py-8">
                 <Car className="w-12 h-12 mx-auto text-muted-foreground mb-3" />
-                <p className="text-muted-foreground">No vehicles added yet</p>
+                <p className="text-muted-foreground">{t('noVehiclesYet')}</p>
                 <Button 
                   variant="link" 
                   className="text-indigo-600 mt-2"
                   onClick={() => setAddCarOpen(true)}
                 >
-                  Add your first vehicle
+                  {t('addFirstVehicle')}
                 </Button>
               </div>
             ) : (
@@ -452,13 +452,13 @@ export default function Dashboard() {
         {/* Upcoming Tasks */}
         <Card className="card-base animate-fade-in-delay-3" data-testid="tasks-card">
           <CardHeader className="pb-2">
-            <CardTitle className="text-lg font-outfit">Upcoming Maintenance</CardTitle>
+            <CardTitle className="text-lg font-outfit">{t('upcomingMaintenance')}</CardTitle>
           </CardHeader>
           <CardContent>
             {upcomingTasks.length === 0 ? (
               <div className="text-center py-8">
                 <CheckCircle2 className="w-12 h-12 mx-auto text-emerald-500 mb-3" />
-                <p className="text-muted-foreground">All maintenance up to date!</p>
+                <p className="text-muted-foreground">{t('allMaintenanceUpToDate')}</p>
               </div>
             ) : (
               <div className="space-y-3">
@@ -488,7 +488,7 @@ export default function Dashboard() {
                         </p>
                       </div>
                       <Badge className={task.status === 'overdue' ? 'status-overdue' : 'status-due-soon'}>
-                        {task.status === 'overdue' ? 'Overdue' : 'Due Soon'}
+                        {task.status === 'overdue' ? t('overdue') : t('dueSoon')}
                       </Badge>
                     </div>
                   );

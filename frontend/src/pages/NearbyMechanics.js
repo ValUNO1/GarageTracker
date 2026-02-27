@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -13,6 +14,7 @@ import {
 } from 'lucide-react';
 
 export default function NearbyMechanics() {
+  const { t } = useLanguage();
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -59,19 +61,19 @@ export default function NearbyMechanics() {
   };
 
   const quickSearches = [
-    { label: 'Auto Mechanic', query: 'auto mechanic near me' },
-    { label: 'Oil Change', query: 'oil change service near me' },
-    { label: 'Brake Repair', query: 'brake repair shop near me' },
-    { label: 'Tire Shop', query: 'tire shop near me' },
-    { label: 'Auto Parts', query: 'auto parts store near me' },
-    { label: 'Car Wash', query: 'car wash near me' },
+    { label: t('autoMechanic'), query: 'auto mechanic near me' },
+    { label: t('oilChangeService'), query: 'oil change service near me' },
+    { label: t('brakeRepair'), query: 'brake repair shop near me' },
+    { label: t('tireShop'), query: 'tire shop near me' },
+    { label: t('autoParts'), query: 'auto parts store near me' },
+    { label: t('carWash'), query: 'car wash near me' },
   ];
 
   return (
     <div className="space-y-6 animate-fade-in" data-testid="nearby-mechanics-page">
       <div>
-        <h1 className="text-3xl font-outfit font-bold text-foreground">Find Nearby Mechanics</h1>
-        <p className="text-muted-foreground mt-1">Locate trusted auto shops in your area</p>
+        <h1 className="text-3xl font-outfit font-bold text-foreground">{t('findNearbyMechanicsTitle')}</h1>
+        <p className="text-muted-foreground mt-1">{t('locateTrustedShops')}</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -80,7 +82,7 @@ export default function NearbyMechanics() {
           <CardHeader>
             <CardTitle className="text-lg font-outfit flex items-center gap-2">
               <MapPin className="w-5 h-5 text-indigo-600" />
-              Location Search
+              {t('locationSearch')}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -95,21 +97,21 @@ export default function NearbyMechanics() {
               {loading ? (
                 <div className="flex items-center gap-3">
                   <Loader2 className="w-5 h-5 animate-spin text-indigo-600" />
-                  <span className="text-sm">Getting your location...</span>
+                  <span className="text-sm">{t('gettingLocation')}</span>
                 </div>
               ) : location ? (
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <Navigation className="w-5 h-5 text-emerald-600" />
                     <div>
-                      <p className="font-medium text-emerald-700 dark:text-emerald-400">Location Found</p>
+                      <p className="font-medium text-emerald-700 dark:text-emerald-400">{t('locationFound')}</p>
                       <p className="text-sm text-muted-foreground">
                         {location.lat.toFixed(4)}, {location.lng.toFixed(4)}
                       </p>
                     </div>
                   </div>
                   <Button variant="ghost" size="sm" onClick={getLocation}>
-                    Refresh
+                    {t('refresh')}
                   </Button>
                 </div>
               ) : error ? (
@@ -117,12 +119,12 @@ export default function NearbyMechanics() {
                   <div className="flex items-center gap-3">
                     <AlertCircle className="w-5 h-5 text-red-600" />
                     <div>
-                      <p className="font-medium text-red-700 dark:text-red-400">Location Error</p>
+                      <p className="font-medium text-red-700 dark:text-red-400">{t('locationError')}</p>
                       <p className="text-sm text-muted-foreground">{error}</p>
                     </div>
                   </div>
                   <Button variant="ghost" size="sm" onClick={getLocation}>
-                    Retry
+                    {t('retry')}
                   </Button>
                 </div>
               ) : null}
@@ -135,7 +137,7 @@ export default function NearbyMechanics() {
                 <Input
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search for auto services..."
+                  placeholder={t('searchForAutoServices')}
                   className="pl-10"
                   data-testid="search-input"
                 />
@@ -146,13 +148,13 @@ export default function NearbyMechanics() {
                 data-testid="search-button"
               >
                 <ExternalLink className="w-4 h-4 mr-2" />
-                Search on Maps
+                {t('searchOnMaps')}
               </Button>
             </div>
 
             {/* Quick Searches */}
             <div>
-              <p className="text-sm font-medium mb-3">Quick Searches</p>
+              <p className="text-sm font-medium mb-3">{t('quickSearches')}</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {quickSearches.map((item, index) => (
                   <Button
@@ -174,33 +176,33 @@ export default function NearbyMechanics() {
         {/* Tips Card */}
         <Card className="card-base">
           <CardHeader>
-            <CardTitle className="text-lg font-outfit">Finding a Good Mechanic</CardTitle>
+            <CardTitle className="text-lg font-outfit">{t('findingGoodMechanic')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-3 text-sm">
               <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
-                <p className="font-medium mb-1">Check Reviews</p>
-                <p className="text-muted-foreground">Look for shops with 4+ stars and read recent reviews.</p>
+                <p className="font-medium mb-1">{t('checkReviews')}</p>
+                <p className="text-muted-foreground">{t('checkReviewsDesc')}</p>
               </div>
               <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
-                <p className="font-medium mb-1">Ask About Certifications</p>
-                <p className="text-muted-foreground">ASE-certified mechanics have passed industry tests.</p>
+                <p className="font-medium mb-1">{t('askCertifications')}</p>
+                <p className="text-muted-foreground">{t('askCertificationsDesc')}</p>
               </div>
               <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
-                <p className="font-medium mb-1">Get Written Estimates</p>
-                <p className="text-muted-foreground">Always get a written estimate before any work begins.</p>
+                <p className="font-medium mb-1">{t('getWrittenEstimates')}</p>
+                <p className="text-muted-foreground">{t('getWrittenEstimatesDesc')}</p>
               </div>
               <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50">
-                <p className="font-medium mb-1">Ask About Warranties</p>
-                <p className="text-muted-foreground">Good shops offer warranties on parts and labor.</p>
+                <p className="font-medium mb-1">{t('askWarranties')}</p>
+                <p className="text-muted-foreground">{t('askWarrantiesDesc')}</p>
               </div>
             </div>
 
             <div className="pt-4 border-t">
-              <p className="text-sm text-muted-foreground mb-3">Need roadside assistance?</p>
+              <p className="text-sm text-muted-foreground mb-3">{t('needRoadsideAssistance')}</p>
               <Button variant="outline" className="w-full" onClick={() => openGoogleMaps('roadside assistance near me')}>
                 <MapPin className="w-4 h-4 mr-2" />
-                Find Roadside Help
+                {t('findRoadsideHelp')}
               </Button>
             </div>
           </CardContent>
