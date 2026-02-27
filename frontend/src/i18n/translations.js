@@ -1,7 +1,7 @@
 export const translations = {
   en: {
     // Common
-    appName: "AutoTrack",
+    appName: "Garage Tracker",
     save: "Save",
     cancel: "Cancel",
     delete: "Delete",
@@ -215,7 +215,7 @@ export const translations = {
   
   es: {
     // Common
-    appName: "AutoTrack",
+    appName: "Garage Tracker",
     save: "Guardar",
     cancel: "Cancelar",
     delete: "Eliminar",
@@ -429,7 +429,7 @@ export const translations = {
   
   ro: {
     // Common
-    appName: "AutoTrack",
+    appName: "Garage Tracker",
     save: "Salvează",
     cancel: "Anulează",
     delete: "Șterge",
@@ -643,7 +643,7 @@ export const translations = {
   
   ru: {
     // Common
-    appName: "AutoTrack",
+    appName: "Garage Tracker",
     save: "Сохранить",
     cancel: "Отмена",
     delete: "Удалить",
@@ -857,7 +857,7 @@ export const translations = {
   
   ko: {
     // Common
-    appName: "AutoTrack",
+    appName: "Garage Tracker",
     save: "저장",
     cancel: "취소",
     delete: "삭제",
@@ -1071,7 +1071,7 @@ export const translations = {
   
   zh: {
     // Common
-    appName: "AutoTrack",
+    appName: "Garage Tracker",
     save: "保存",
     cancel: "取消",
     delete: "删除",
@@ -1285,7 +1285,7 @@ export const translations = {
   
   fr: {
     // Common
-    appName: "AutoTrack",
+    appName: "Garage Tracker",
     save: "Enregistrer",
     cancel: "Annuler",
     delete: "Supprimer",
