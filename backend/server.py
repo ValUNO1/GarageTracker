@@ -481,7 +481,9 @@ async def complete_maintenance_task(task_id: str, mileage: int, current_user: di
     now = datetime.now(timezone.utc).isoformat()
     update_data = {
         "last_performed_date": now,
-        "last_performed_mileage": mileage
+        "last_performed_mileage": mileage,
+        "replacement_requested": False,
+        "replacement_reason": None
     }
     
     await db.maintenance_tasks.update_one({"id": task_id}, {"$set": update_data})
@@ -491,6 +493,55 @@ async def complete_maintenance_task(task_id: str, mileage: int, current_user: di
         {"id": task["car_id"], "current_mileage": {"$lt": mileage}},
         {"$set": {"current_mileage": mileage}}
     )
+    
+    task = await db.maintenance_tasks.find_one({"id": task_id}, {"_id": 0})
+    car = await db.cars.find_one({"id": task["car_id"]}, {"_id": 0})
+    car_mileage = car.get("current_mileage", 0) if car else 0
+    status, next_due_mileage, next_due_date = calculate_maintenance_status(task, car_mileage)
+    task["status"] = status
+    task["next_due_mileage"] = next_due_mileage
+    task["next_due_date"] = next_due_date
+    
+    return MaintenanceTaskResponse(**task)
+
+class ReplacementRequest(BaseModel):
+    reason: str
+
+@api_router.post("/maintenance/{task_id}/request-replacement", response_model=MaintenanceTaskResponse)
+async def request_replacement(task_id: str, request: ReplacementRequest, current_user: dict = Depends(get_current_user)):
+    task = await db.maintenance_tasks.find_one({"id": task_id, "user_id": current_user["id"]})
+    if not task:
+        raise HTTPException(status_code=404, detail="Task not found")
+    
+    update_data = {
+        "replacement_requested": True,
+        "replacement_reason": request.reason
+    }
+    
+    await db.maintenance_tasks.update_one({"id": task_id}, {"$set": update_data})
+    
+    task = await db.maintenance_tasks.find_one({"id": task_id}, {"_id": 0})
+    car = await db.cars.find_one({"id": task["car_id"]}, {"_id": 0})
+    car_mileage = car.get("current_mileage", 0) if car else 0
+    status, next_due_mileage, next_due_date = calculate_maintenance_status(task, car_mileage)
+    task["status"] = status
+    task["next_due_mileage"] = next_due_mileage
+    task["next_due_date"] = next_due_date
+    
+    return MaintenanceTaskResponse(**task)
+
+@api_router.post("/maintenance/{task_id}/cancel-replacement", response_model=MaintenanceTaskResponse)
+async def cancel_replacement(task_id: str, current_user: dict = Depends(get_current_user)):
+    task = await db.maintenance_tasks.find_one({"id": task_id, "user_id": current_user["id"]})
+    if not task:
+        raise HTTPException(status_code=404, detail="Task not found")
+    
+    update_data = {
+        "replacement_requested": False,
+        "replacement_reason": None
+    }
+    
+    await db.maintenance_tasks.update_one({"id": task_id}, {"$set": update_data})
     
     task = await db.maintenance_tasks.find_one({"id": task_id}, {"_id": 0})
     car = await db.cars.find_one({"id": task["car_id"]}, {"_id": 0})
