@@ -208,7 +208,7 @@ export default function NearbyMechanics() {
       </div>
 
       {/* Map Embed Placeholder */}
-      {location && (
+      {location && process.env.REACT_APP_GOOGLE_MAPS_KEY && (
         <Card className="card-base overflow-hidden">
           <CardContent className="p-0">
             <iframe
@@ -218,7 +218,7 @@ export default function NearbyMechanics() {
               style={{ border: 0 }}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              src={`https://www.google.com/maps/embed/v1/search?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=auto+mechanic&center=${location.lat},${location.lng}&zoom=13`}
+              src={`https://www.google.com/maps/embed/v1/search?key=${process.env.REACT_APP_GOOGLE_MAPS_KEY}&q=auto+mechanic&center=${location.lat},${location.lng}&zoom=13`}
               data-testid="map-embed"
             />
           </CardContent>
