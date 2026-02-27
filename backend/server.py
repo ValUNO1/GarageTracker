@@ -668,11 +668,11 @@ async def get_dashboard_stats(current_user: dict = Depends(get_current_user)):
 
 @api_router.get("/")
 async def root():
-    return {"message": "AutoTrack API is running"}
+    return {"message": "Garage Tracker API is running"}
 
 @api_router.get("/health")
 async def health():
-    return {"status": "healthy", "service": "autotrack-api"}
+    return {"status": "healthy", "service": "garage-tracker-api"}
 
 # Include router and middleware
 app.include_router(api_router)
