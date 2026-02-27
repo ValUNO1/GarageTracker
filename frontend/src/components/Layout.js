@@ -37,7 +37,6 @@ export default function Layout() {
 
   const navItems = [
     { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-    { to: '/ai-mechanic', icon: Wrench, label: 'AI Mechanic' },
     { to: '/nearby-mechanics', icon: MapPin, label: 'Find Mechanics' },
     { to: '/settings', icon: Settings, label: 'Settings' },
   ];
