@@ -33,7 +33,7 @@ import {
   X
 } from 'lucide-react';
 
-const API_URL = process.env.REACT_APP_BACKEND_URL + '/api';
+const API_URL = `${process.env.REACT_APP_BACKEND_URL || ''}/api`.replace(/([^:]\/)\/+/g, '$1');
 
 const maintenanceTypes = [
   { value: 'oil_change', label: 'Oil Change', icon: Droplet, defaultMiles: 5000, defaultMonths: 6 },
