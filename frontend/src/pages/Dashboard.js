@@ -92,14 +92,49 @@ export default function Dashboard() {
   const handleAddCar = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${API_URL}/cars`, newCar);
+      const carData = { ...newCar };
+      if (imagePreview && imageMethod === 'upload') {
+        carData.image_url = imagePreview;
+      }
+      await axios.post(`${API_URL}/cars`, carData);
       toast.success('Car added successfully!');
       setAddCarOpen(false);
-      setNewCar({ make: '', model: '', year: new Date().getFullYear(), color: '', license_plate: '', current_mileage: 0 });
+      setNewCar({ make: '', model: '', year: new Date().getFullYear(), color: '', license_plate: '', current_mileage: 0, image_url: '' });
+      setImagePreview(null);
+      setImageMethod('upload');
       fetchData();
     } catch (error) {
       toast.error('Failed to add car');
     }
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error('Image must be less than 5MB');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleImageUrlChange = (url) => {
+    setNewCar({ ...newCar, image_url: url });
+    if (url) {
+      setImagePreview(url);
+    } else {
+      setImagePreview(null);
+    }
+  };
+
+  const clearImage = () => {
+    setImagePreview(null);
+    setNewCar({ ...newCar, image_url: '' });
   };
 
   const upcomingTasks = tasks
