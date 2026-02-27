@@ -253,23 +253,27 @@ def calculate_maintenance_status(task: dict, car_mileage: int) -> tuple:
     next_due_mileage = None
     next_due_date = None
     
-    if task.get("last_performed_mileage"):
-        next_due_mileage = task["last_performed_mileage"] + task["interval_miles"]
-        if car_mileage >= next_due_mileage:
-            status = "overdue"
-        elif car_mileage >= next_due_mileage - 500:
-            status = "due_soon"
-    
-    if task.get("last_performed_date"):
-        try:
-            last_date = datetime.fromisoformat(task["last_performed_date"].replace('Z', '+00:00'))
-            next_due_date = (last_date + timedelta(days=task["interval_months"] * 30)).isoformat()
-            if datetime.now(timezone.utc) >= datetime.fromisoformat(next_due_date.replace('Z', '+00:00')):
+    # Check if replacement is requested - this takes priority
+    if task.get("replacement_requested"):
+        status = "replacement_requested"
+    else:
+        if task.get("last_performed_mileage"):
+            next_due_mileage = task["last_performed_mileage"] + task["interval_miles"]
+            if car_mileage >= next_due_mileage:
                 status = "overdue"
-            elif datetime.now(timezone.utc) >= datetime.fromisoformat(next_due_date.replace('Z', '+00:00')) - timedelta(days=14):
-                status = "due_soon" if status != "overdue" else "overdue"
-        except:
-            pass
+            elif car_mileage >= next_due_mileage - 500:
+                status = "due_soon"
+        
+        if task.get("last_performed_date"):
+            try:
+                last_date = datetime.fromisoformat(task["last_performed_date"].replace('Z', '+00:00'))
+                next_due_date = (last_date + timedelta(days=task["interval_months"] * 30)).isoformat()
+                if datetime.now(timezone.utc) >= datetime.fromisoformat(next_due_date.replace('Z', '+00:00')):
+                    status = "overdue"
+                elif datetime.now(timezone.utc) >= datetime.fromisoformat(next_due_date.replace('Z', '+00:00')) - timedelta(days=14):
+                    status = "due_soon" if status != "overdue" else "overdue"
+            except:
+                pass
     
     return status, next_due_mileage, next_due_date
 
