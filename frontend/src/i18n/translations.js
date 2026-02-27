@@ -889,6 +889,14 @@ export const translations = {
     findMechanics: "정비소 찾기",
     settings: "설정",
     
+    // Distance Unit
+    distanceUnit: "거리 단위",
+    selectDistanceUnit: "마일 또는 킬로미터를 선택하세요",
+    miles: "마일",
+    kilometers: "킬로미터",
+    mi: "mi",
+    km: "km",
+    
     // Dashboard
     overview: "차량 정비 개요",
     addVehicle: "차량 추가",
